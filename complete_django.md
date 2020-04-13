@@ -1,39 +1,58 @@
-### First Step
+### Introduction
+1. What is Django?
+1. History of Django Framework
+1. Features of Django Framework
+    1. Stability
+    1. Excellent Documentation
+    1. Highly Scalable
+    1. Huge Library of Packages
+    1. Allows Pragmatic and Robust Design
+    1. Django has Evolved Over Time
+    1. Open-Source Technology
+    1. One of the World’s Best Software Community
+    1. Django has Lots of Pre-Made Apps
+    1. Loose Coupling
+    1. Lesser Code
+    1. Doesn’t Repeat
+    1. Consistency
+    1. SEO Optimised
+    1. Versatile in Nature
+    1. Offers High Security
+    1. Thoroughly Tested
+    1. Provides Rapid Development
+    1. Implemented in Python
+    1. Better CDN connectivity and Content Management
+    1. Batteries Included Framework
+    1. Fast Processing
+
+1. Cons
+    1. Django is Monolithic
+    2. Not for smaller projects
+    3. Uses Regular Expression for URLs
+
+1. Architecture
+    1. MVC Pattern in Django Structure
+    1. MTV Pattern
+        1. Model --> Model
+        1. View --> Template
+        1. Controller --> Views
+    1. Benefits of Django Architecture
+        1. Rapid Development
+        2. Loosely Coupled
+        3. Ease of Modification
+
+### Development Process
+1. Installation
+1. Creating project
+1. Applications - Ref
+1. Settings - Ref
+1. Exceptions
 1. django-admin and manage.py - Ref
     1. Running management commands from your code - Ref
-1. Settings - Ref
-1. Applications - Ref
+1. Testing
+1. Deployment
 
-
-### Handling HTTP requests
-1. Writing views
-    1. function based
-        1. simple view
-        1. mapping URL to view
-        1. Request and response objects - Ref
-        1. returning errors
-        1. Customizing error views
-        1. View decorators
-            1. Allowed HTTP methods 
-                1. `require_http_methods`
-                1. `require_GET()`
-                1. `require_POST()`
-                1. `require_safe`
-            1. Conditional view processing
-            1. GZip compression
-            1. Vary headers
-            1. Caching
-   
-    1. class based view
-        1. Introduction to class-based views
-        1. Built-in class-based generic views
-        1. Form handling with class-based views
-        1. Using mixins with class-based views
-        1. Basic examples
-        1. Usage in your URLconf
-        1. Subclassing generic views
-        1. View decorators - Extra
-
+## View
 1. URL dispatcher
     1. How Django processes a request
     1. Paths - `path()`
@@ -63,6 +82,95 @@
             1. Application namespaces of included URLconfs can be specified in two ways.
                 1. `app_name`
                 1. `(<list of path()/re_path() instances>, <application namespace>)`
+
+1. Writing views
+    1. simple view
+    1. mapping URL to view
+    1. returning errors
+    1. Customizing error views
+    1. View decorators
+        1. Allowed HTTP methods 
+            1. `require_http_methods`
+            1. `require_GET()`
+            1. `require_POST()`
+            1. `require_safe`
+        1. Conditional view processing
+        1. GZip compression
+        1. Vary headers
+        1. Caching
+
+1. Django shortcut functions
+    1. `render(request, template_name, context=None, content_type=None, status=None, using=None)`
+    1. `redirect()` -  HttpResponseRedirect()
+    1. `get_object_or_404()`
+    1. `get_list_or_404()`
+
+1. View Decorators
+    1. Allowed HTTP methods
+        1. `require_http_methods`
+        1. `require_GET()`
+        1. `require_POST()`
+        1. `require_safe()`
+
+    1. Conditional view processing
+        1. `condition(etag_func=None, last_modified_func=None)`
+        1. `etag(etag_func)`
+        1. `last_modified(last_modified_func)`
+
+    1. GZip compression
+        1. `gzip_page()`
+
+    1. Vary headers
+        1.  `vary_on_cookie(func)`
+        1.  `vary_on_headers(*headers)`
+
+    1. Caching
+        1. `cache_control(**kwargs)`
+        1. `never_cache(view_func)`
+
+1. Built-in Views
+    1. Serving files in development
+        * `static.serve(request, path, document_root, show_indexes=False)`
+    
+    1. Error views
+        1. The 404 (page not found) view¶
+            * `defaults.page_not_found(request, exception, template_name='404.html')`
+        1. The 500 (server error) view
+            * `defaults.server_error(request, template_name='500.html')`
+        1. The 403 (HTTP Forbidden) view
+            * `defaults.permission_denied(request, exception, template_name='403.html')`
+        1. The 400 (bad request) view
+            * `defaults.bad_request(request, exception, template_name='400.html')`
+
+1. Request-Response objects
+    1. Attribute
+        1. HttpRequest.scheme
+        1. HttpRequest.body
+        1. HttpRequest.path
+        1. HttpRequest.path_info
+        1. HttpRequest.method
+        1. HttpRequest.encoding
+        1. HttpRequest.content_type
+        1. HttpRequest.content_params
+        1. HttpRequest.GET
+        1. HttpRequest.POST
+        1. HttpRequest.COOKIES
+        1. HttpRequest.FILES
+        1. HttpRequest.META
+        1. HttpRequest.headers
+        1. HttpRequest.resolver_match
+
+    1. Attributes set by middleware
+        1. HttpRequest.current_app
+        1. HttpRequest.urlconf
+
+    1. Attributes set by middleware
+        1. HttpRequest.session
+        1. HttpRequest.site
+        1. HttpRequest.user
+        
+
+1. TemplateResponse objects
     
 1. File Uploads
     1. File handling - Ref
@@ -77,14 +185,24 @@
     1. Changing upload handler behavior - through setting.py
     1. Modifying upload handlers on the fly
 
-1. Django shortcut functions
-    1. `render(request, template_name, context=None, content_type=None, status=None, using=None)`
-    1. `redirect()` -  HttpResponseRedirect()
-    1. `get_object_or_404()`
-    1. `get_list_or_404()`
+1. class based view
+    1. Introduction to class-based views
+    1. Built-in class-based generic views
+        1. display views
+        1. editing views
+    1. Form handling with class-based views
+    1. Using mixins with class-based views
+    1. Flattened index
+    1. Basic examples
+    1. Usage in your URLconf
+    1. Subclassing generic views
+    1. View decorators - Extra
+
+1. Advanced: 
+    1. Generating CSV
+    1. Generating PDF
 
 1. Middleware
-    1. Middleware - Ref
     1. Writing your own middleware
     1. Marking middleware as unused
     1. Activating middleware
@@ -97,55 +215,21 @@
     1. Dealing with streaming responses
     1. Exception handling
 
-1. How to use sessions
-
 ### Templates
 
 1. Support for template engines
 1. The Django template language
+1. Built-in tags and filters
+1. Humanization
+1. Template API
+1. Custom tags and filters
 
 
 ### Models & Databases
-1. Models
-1. Making queries
-1. Aggregation
-1. Search
-1. Managers
-1. Performing raw SQL queries
-1. Database transactions
-1. Multiple databases
-1. Tablespaces
-1. Database access optimization
-1. Database instrumentation
-
-### Migrations
-
-1. The Commands
-1. Backend Support
-1. Workflow
-1. Dependencies
-1. Migration files
-1. Adding migrations to apps
-1. Reversing migrations
-1. Historical models
-1. Considerations when removing model fields
-1. Data Migrations
-1. Squashing migrations
-1. Serializing values
-1. Supporting multiple Django versions
 
 ### Admin
 
 ### Working with forms
-
-1. HTML forms
-1. Django’s role in forms
-1. Forms in Django
-1. Building a form
-1. More about Django Form classes
-1. Working with form templates
-1. Further topics
-
 
 ### Managing files
 
