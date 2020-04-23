@@ -14,4 +14,11 @@
 13. raw sql queries on model
 14. third party tool integrations - Redis, RabbitMQ, ElasticSearch, Celary.
 15. How to put custom validation on Form and Model Fields.
+16. What is serializer
+17. What is class based views
+18. what is viewsets
+19. django user model
+20. Authentication backend
+21. reverse query for releated model
+22. what is releated_name arg.
 """
