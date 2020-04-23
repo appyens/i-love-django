@@ -12,4 +12,6 @@
 11. Manager in django
 12. optimize django queries
 13. raw sql queries on model
+14. third party tool integrations - Redis, RabbitMQ, ElasticSearch, Celary.
+15. How to put custom validation on Form and Model Fields.
 """
