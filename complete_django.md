@@ -133,7 +133,7 @@
         * `static.serve(request, path, document_root, show_indexes=False)`
     
     1. Error views
-        1. The 404 (page not found) view¶
+        1. The 404 (page not found) view
             * `defaults.page_not_found(request, exception, template_name='404.html')`
         1. The 500 (server error) view
             * `defaults.server_error(request, template_name='500.html')`
@@ -171,6 +171,7 @@
         
 
 1. TemplateResponse objects
+
     
 1. File Uploads
     1. File handling - Ref
@@ -226,6 +227,190 @@
 
 
 ### Models & Databases
+1. Introduction
+    1. Field types
+    1. Field Option
+    1. Automatic primary key fields
+    1. Verbose field names
+    1. Relationships
+        1. Many-to-one relationships
+        1. Many-to-many relationships
+        1. One-to-one relationships
+    1. Models across files
+    1. Field name restrictions
+    1. Custom field types
+    1. Meta options
+    1. Model attributes - `objects`
+    1. Model methods - 
+        1. `custom methods provides row level functionality`
+        1. `_str__()`
+        1. `get_absolute_url()`
+    1. Overriding predefined model methods
+    1. Executing custom SQL
+    1. Model inheritance
+        1. Abstract base classes
+            1. Meta inheritance
+            1. Be careful with related_name and related_query_name
+        1. Multi-table inheritance
+            1. Meta and multi-table inheritance
+            1. Inheritance and reverse relations
+            1. Specifying the parent link field
+        1. Proxy models
+            1. QuerySets still return the model that was requested
+            1. Base class restrictions
+            1. Proxy model managers
+            1. Differences between proxy inheritance and unmanaged models
+        1. Multiple inheritance
+            1. Field name “hiding” is not permitted
+    1. Organizing models in a package
+
+1. Field Types
+
+    1. `AutoField`
+    1. `BigAutoField`
+    1. `BigIntegerField`
+    1. `BinaryField`
+    1. `BooleanField`
+    1. `CharField`
+    1. `DateField`
+    1. `DateTimeField`
+    1. `DecimalField`
+    1. `DurationField`
+    1. `EmailField`
+    1. `FileField`
+        FileField and FieldFile
+    1. `FilePathField`
+    1. `FloatField`
+    1. `ImageField`
+    1. `IntegerField`
+    1. `GenericIPAddressField`
+    1. `NullBooleanField`
+    1. `PositiveIntegerField`
+    1. `PositiveSmallIntegerField`
+    1. `SlugField`
+    1. `SmallAutoField`
+    1. `SmallIntegerField`
+    1. `TextField`
+    1. `TimeField`
+    1. `URLField`
+    1. `UUIDField`
+
+    1. Relationship fields
+
+        1. ForeignKey
+            1. Database Representation
+                1. `class ForeignKey(to, on_delete, **options)`
+            1. Arguments
+                1. `on_delete`
+                1. `limit_choices_to`
+                1. `related_name`
+                1. `related_query_name1`
+                1. `to_field`
+                1. `db_constraint`
+                1. `swappable`
+            
+        1. ManyToManyField
+            1. Database Representation
+                1. `class ManyToManyField(to, **options)`
+            1. Arguments
+                1. `related_name`
+                1. `related_query_name`
+                1. `limit_choices_to`
+                1. `symmetrical`
+                1. `through`
+                1. `through_fields`
+                1. `db_table`
+                1. `db_constraint`
+                1. `swappable`
+        1. OneToOneField
+            1. Database Representation
+                1. `class OneToOneField(to, on_delete, parent_link=False, **options)`
+                1. It is same as ForeignKey with unique = True
+            1. Arguments
+                1. `parent_link`
+
+1. Field Option
+    1. `null`
+    1. `blank`
+    1. `choices`
+    1. Enumeration types
+    1. `db_column`
+    1. `db_index`
+    1. `db_tablespace`
+    1. `default`
+    1. `editable`
+    1. `error_messages`
+    1. `help_text`
+    1. `primary_key`
+    1. `unique`
+    1. `unique_for_date`
+    1. `unique_for_month`
+    1. `unique_for_year`
+    1. `verbose_name`
+    1. `validators`
+
+1. Field Class
+    1. Methods
+        1. `get_internal_type()`
+        1. `db_type(connection)`
+        1. `rel_db_type(connection)`
+        1. `get_prep_value(value)`
+        1. `get_db_prep_value(value, connection, prepared=False)`
+        1. `from_db_value(value, expression, connection)`
+        1. `get_db_prep_save(value, connection)`
+        1. `pre_save(model_instance, add)`
+        1. `to_python(value)`
+        1. `value_from_object(obj)`
+        1. `value_to_string(obj)`
+        1. `formfield(form_class=None, choices_form_class=None, **kwargs)`
+        1. `deconstruct()`
+    1. Attributes
+        1. `auto_created`
+        1. `concrete`
+        1. `hidden`
+        1. `is_realation`
+        1. `model`
+    1. Attributes for fields with relation
+        1. `many_to_many`
+        1. `many_to_one`
+        1. `one_to_many`
+        1. `one_to_one`
+        1. `related_model`
+
+1. Model Meta options
+    1. `abstract`
+    1. `app_label`
+    1. `base_manager_name`
+    1. `db_table`
+    1. `db_tablespace`
+    1. `default_manager_name`
+    1. `default_related_name`
+    1. `default_related_name`
+    1. `order_with_respect_to`
+    1. `ordering`
+    1. `permissions`
+    1. `default_permissions`
+    1. `proxy`
+    1. `required_db_features`
+    1. `required_db_vendor`
+    1. `select_on_save`
+    1. `indexes`
+        1. Model index reference
+        1. `class Index(fields=(), name=None, db_tablespace=None, opclasses=(), condition=None)`
+        1. It is given in Meta option
+    1. `unique_together`
+    1. `constraints`
+    1. `verbose_name`
+    1. `verbose_name_plural`
+    1. `label`
+    1. `label_lower`
+
+1. Model class reference
+    1. `Model.objects`
+
+1. Querysets:
+    1. Making Queries
+
 
 ### Admin
 
