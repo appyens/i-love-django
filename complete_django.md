@@ -53,7 +53,7 @@
 1. Deployment
 
 ## View
-1. URL dispatcher
+1. URL confs
     1. How Django processes a request
     1. Paths - `path()`
     1. Capturing values from URL - `path('articles/<int:year>/<int:month>/<slug:slug>/', views.article_detail)`
@@ -174,17 +174,32 @@
 
     
 1. File Uploads
-    1. File handling - Ref
-    1. Basic file uploads (with Django form)
-    1. Handling uploaded files with a model (with Django form)
-    1. Uploading multiple files (with Django form)
-        1. implemnt post method in `FormView()`
-    1. Upload Handlers
-        1. `django.core.files.uploadhandler.MemoryFileUploadHandler`
-        1. `django.core.files.uploadhandler.TemporaryFileUploadHandler`
-    1. Where uploaded data is stored
-    1. Changing upload handler behavior - through setting.py
-    1. Modifying upload handlers on the fly
+    1. Overview
+        1. Basic file uploads (with Django form)
+        1. Handling uploaded files with a model (with Django form)
+        1. Uploading multiple files (with Django form)
+            1. implemnt post method in `FormView()`
+        1. Upload Handlers
+            1. `django.core.files.uploadhandler.MemoryFileUploadHandler`
+            1. `django.core.files.uploadhandler.TemporaryFileUploadHandler`
+        1. Where uploaded data is stored
+        1. Changing upload handler behavior - through setting.py
+        1. Modifying upload handlers on the fly
+    
+    1. File Object
+        1. The File class¶
+        1. The ContentFile class¶
+        1. The ImageFile class¶
+        1. Additional methods on files attached to objects¶
+            1.  File.save(name, content, save=True)¶
+            1.  File.delete(save=True)¶
+    
+    1. File storage API¶
+        1. Getting the current storage class¶
+            1.  class DefaultStorage¶
+        1. The FileSystemStorage class¶
+            * `class FileSystemStorage(location=None, base_url=None, file_permissions_mode=None, directory_permissions_mode=None)`
+        1. The Storage class¶
 
 1. class based view
     1. Introduction to class-based views
@@ -410,7 +425,88 @@
 
 1. Querysets:
     1. Making Queries
+        1. Creating objects¶
+        1. Saving changes to objects¶
+            1. Saving ForeignKey and ManyToManyField fields¶
+        1. Retrieving objects¶
+            1. Retrieving all objects¶
+            1. Retrieving specific objects with filters¶
+            1. Chaining filters¶
+            1. Filtered QuerySets are unique¶
+            1. QuerySets are lazy¶
+            1. Retrieving a single object with get()¶
+            1. Other QuerySet methods¶
+            1. Limiting QuerySets¶
+            1. Field lookups¶
+            1. Lookups that span relationships¶
+                1. Spanning multi-valued relationships¶
+            1. Filters can reference fields on the model¶
+            1. The pk lookup shortcut¶
+            1. Escaping percent signs and underscores in LIKE statements¶
+            1. Caching and QuerySets¶
+                1. When QuerySets are not cached¶
+            1. Complex lookups with Q objects¶
+        1. Comparing objects¶
+        1. Deleting objects¶
+        1. Copying model instances¶
+        1. Updating multiple objects at once¶
+        1. Related objects¶
+            1. One-to-many relationships¶
+                1. Forward¶
+                1. Following relationships “backward”¶
+                1. Using a custom reverse manager¶
+                1. Additional methods to handle related objects¶
+            1. Many-to-many relationships¶
+            1. One-to-one relationships¶
+        1. How are the backward relationships possible?¶
+        1. Queries over related objects¶
+        1. Falling back to raw SQL¶
+    
+    1. Queryset Methods
+        1. When QuerySets are evaluated¶
+            1. Iteration
+            1. Slicing
+            1. Pickling/Caching
+            1. repr()
+            1. len()
+            1. list()
+            1. bool()
+        1. Pickling QuerySets¶
+        1.  class QuerySet(model=None, query=None, using=None, hints=None)¶
+            1. two public attributes - ordered and db
+        1. Methods that return new QuerySets¶
+        1. Operators that return new QuerySets¶
+            1. AND
+            1. OR
+        1. Methods that do not return QuerySets¶
+            1. get
+            1. create()
+            1. get_or_create()
+            1. update_or_create()
+            1. bulk_create()
+            1. bulk_update()
+            1. count()
+            1. in_bulk()
+            1. iterator()
+            1. latest()
+            1. earliest()
+            1. first()
+            1. last()
+            1. aggregate()
+            1. exists()
+            1. update()
+            1. delete()
+            1. as_manager()
+            1. explain()
+        1. Field Lookups
+        1. Aggregation functions¶
+        1. Query-related tools¶
 
+    1. Lookup Expressions (Lookup API reference¶)
+        1. Registration API¶
+        1. The Query Expression API¶
+        1. Transform reference¶
+        1. Lookup reference¶
 
 ### Admin
 
