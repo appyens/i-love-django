@@ -187,19 +187,19 @@
         1. Modifying upload handlers on the fly
     
     1. File Object
-        1. The File class¶
-        1. The ContentFile class¶
-        1. The ImageFile class¶
-        1. Additional methods on files attached to objects¶
-            1.  File.save(name, content, save=True)¶
-            1.  File.delete(save=True)¶
+        1. The File class
+        1. The ContentFile class
+        1. The ImageFile class
+        1. Additional methods on files attached to objects
+            1.  File.save(name, content, save=True)
+            1.  File.delete(save=True)
     
-    1. File storage API¶
-        1. Getting the current storage class¶
-            1.  class DefaultStorage¶
-        1. The FileSystemStorage class¶
+    1. File storage API
+        1. Getting the current storage class
+            1.  class DefaultStorage
+        1. The FileSystemStorage class
             * `class FileSystemStorage(location=None, base_url=None, file_permissions_mode=None, directory_permissions_mode=None)`
-        1. The Storage class¶
+        1. The Storage class
 
 1. class based view
     1. Introduction to class-based views
@@ -425,45 +425,45 @@
 
 1. Querysets:
     1. Making Queries
-        1. Creating objects¶
-        1. Saving changes to objects¶
-            1. Saving ForeignKey and ManyToManyField fields¶
-        1. Retrieving objects¶
-            1. Retrieving all objects¶
-            1. Retrieving specific objects with filters¶
-            1. Chaining filters¶
-            1. Filtered QuerySets are unique¶
-            1. QuerySets are lazy¶
-            1. Retrieving a single object with get()¶
-            1. Other QuerySet methods¶
-            1. Limiting QuerySets¶
-            1. Field lookups¶
-            1. Lookups that span relationships¶
-                1. Spanning multi-valued relationships¶
-            1. Filters can reference fields on the model¶
-            1. The pk lookup shortcut¶
-            1. Escaping percent signs and underscores in LIKE statements¶
-            1. Caching and QuerySets¶
-                1. When QuerySets are not cached¶
-            1. Complex lookups with Q objects¶
-        1. Comparing objects¶
-        1. Deleting objects¶
-        1. Copying model instances¶
-        1. Updating multiple objects at once¶
-        1. Related objects¶
-            1. One-to-many relationships¶
-                1. Forward¶
-                1. Following relationships “backward”¶
-                1. Using a custom reverse manager¶
-                1. Additional methods to handle related objects¶
-            1. Many-to-many relationships¶
-            1. One-to-one relationships¶
-        1. How are the backward relationships possible?¶
-        1. Queries over related objects¶
-        1. Falling back to raw SQL¶
+        1. Creating objects
+        1. Saving changes to objects
+            1. Saving ForeignKey and ManyToManyField fields
+        1. Retrieving objects
+            1. Retrieving all objects
+            1. Retrieving specific objects with filters
+            1. Chaining filters
+            1. Filtered QuerySets are unique
+            1. QuerySets are lazy
+            1. Retrieving a single object with get()
+            1. Other QuerySet methods
+            1. Limiting QuerySets
+            1. Field lookups
+            1. Lookups that span relationships
+                1. Spanning multi-valued relationships
+            1. Filters can reference fields on the model
+            1. The pk lookup shortcut
+            1. Escaping percent signs and underscores in LIKE statements
+            1. Caching and QuerySets
+                1. When QuerySets are not cached
+            1. Complex lookups with Q objects
+        1. Comparing objects
+        1. Deleting objects
+        1. Copying model instances
+        1. Updating multiple objects at once
+        1. Related objects
+            1. One-to-many relationships
+                1. Forward
+                1. Following relationships “backward”
+                1. Using a custom reverse manager
+                1. Additional methods to handle related objects
+            1. Many-to-many relationships
+            1. One-to-one relationships
+        1. How are the backward relationships possible?
+        1. Queries over related objects
+        1. Falling back to raw SQL
     
     1. Queryset Methods
-        1. When QuerySets are evaluated¶
+        1. When QuerySets are evaluated
             1. Iteration
             1. Slicing
             1. Pickling/Caching
@@ -471,14 +471,14 @@
             1. len()
             1. list()
             1. bool()
-        1. Pickling QuerySets¶
-        1.  class QuerySet(model=None, query=None, using=None, hints=None)¶
+        1. Pickling QuerySets
+        1.  class QuerySet(model=None, query=None, using=None, hints=None)
             1. two public attributes - ordered and db
-        1. Methods that return new QuerySets¶
-        1. Operators that return new QuerySets¶
+        1. Methods that return new QuerySets
+        1. Operators that return new QuerySets
             1. AND
             1. OR
-        1. Methods that do not return QuerySets¶
+        1. Methods that do not return QuerySets
             1. get
             1. create()
             1. get_or_create()
@@ -499,16 +499,160 @@
             1. as_manager()
             1. explain()
         1. Field Lookups
-        1. Aggregation functions¶
-        1. Query-related tools¶
+        1. Aggregation functions
+        1. Query-related tools
 
-    1. Lookup Expressions (Lookup API reference¶)
-        1. Registration API¶
-        1. The Query Expression API¶
-        1. Transform reference¶
-        1. Lookup reference¶
+    1. Lookup Expressions (Lookup API reference)
+        1. Registration API
+        1. The Query Expression API
+        1. Transform reference
+        1. Lookup reference
 
 ### Admin
+1. ModelAdmin objects
+1. The register decorator
+1. Discovery of admin files
+1. ModelAdmin options
+    1.  ModelAdmin.actions
+    1.  ModelAdmin.actions_on_top
+    1.  ModelAdmin.actions_on_bottom
+    1.  ModelAdmin.actions_selection_counter
+    1.  ModelAdmin.date_hierarchy
+    1.  ModelAdmin.empty_value_display
+    1.  ModelAdmin.exclude
+    1.  ModelAdmin.fields
+    1.  ModelAdmin.fieldsets
+    1.  ModelAdmin.filter_horizontal
+    1.  ModelAdmin.filter_vertical
+    1.  ModelAdmin.form
+    1.  ModelAdmin.formfield_overrides
+    1.  ModelAdmin.inlines
+    1.  ModelAdmin.list_display
+    1.  ModelAdmin.list_display_links
+    1.  ModelAdmin.list_editable
+    1.  ModelAdmin.list_filter
+    1.  ModelAdmin.list_max_show_all
+    1.  ModelAdmin.list_per_page
+    1.  ModelAdmin.list_select_related
+    1.  ModelAdmin.ordering
+    1.  ModelAdmin.paginator
+    1.  ModelAdmin.prepopulated_fields
+    1.  ModelAdmin.preserve_filters
+    1.  ModelAdmin.radio_fields
+    1.  ModelAdmin.autocomplete_fields
+    1.  ModelAdmin.raw_id_fields
+    1.  ModelAdmin.readonly_fields
+    1.  ModelAdmin.save_as
+    1.  ModelAdmin.save_as_continue
+    1.  ModelAdmin.save_on_top
+    1.  ModelAdmin.search_fields
+    1.  ModelAdmin.show_full_result_count
+    1.  ModelAdmin.sortable_by
+    1.  ModelAdmin.view_on_site
+
+1. Custom template options
+    1. ModelAdmin.add_form_template
+    1. ModelAdmin.change_form_template
+    1. ModelAdmin.change_list_template
+    1. ModelAdmin.delete_confirmation_template
+    1. ModelAdmin.delete_selected_confirmation_template
+    1. ModelAdmin.object_history_template
+    1. ModelAdmin.popup_response_template
+
+1. ModelAdmin methods
+    1.  ModelAdmin.save_model(request, obj, form, change)
+    1.  ModelAdmin.delete_model(request, obj)
+    1.  ModelAdmin.delete_queryset(request, queryset)
+    1.  ModelAdmin.save_formset(request, form, formset, change)
+    1.  ModelAdmin.get_ordering(request)
+    1.  ModelAdmin.get_search_results(request, queryset, search_term)
+    1.  ModelAdmin.save_related(request, form, formsets, change)
+    1.  ModelAdmin.get_autocomplete_fields(request)
+    1.  ModelAdmin.get_readonly_fields(request, obj=None)
+    1.  ModelAdmin.get_prepopulated_fields(request, obj=None)
+    1.  ModelAdmin.get_list_display(request)
+    1.  ModelAdmin.get_list_display_links(request, list_display)
+    1.  ModelAdmin.get_exclude(request, obj=None)
+    1.  ModelAdmin.get_fields(request, obj=None)
+    1.  ModelAdmin.get_fieldsets(request, obj=None)
+    1.  ModelAdmin.get_list_filter(request)
+    1.  ModelAdmin.get_list_select_related(request)
+    1.  ModelAdmin.get_search_fields(request)
+    1.  ModelAdmin.get_sortable_by(request)
+    1.  ModelAdmin.get_inline_instances(request, obj=None)
+    1.  ModelAdmin.get_inlines(request, obj)
+    1.  ModelAdmin.get_urls()
+    1.  ModelAdmin.get_form(request, obj=None, **kwargs)
+    1.  ModelAdmin.get_formsets_with_inlines(request, obj=None)
+    1.  ModelAdmin.formfield_for_foreignkey(db_field, request, **kwargs)
+    1.  ModelAdmin.formfield_for_manytomany(db_field, request, **kwargs)
+    1.  ModelAdmin.formfield_for_choice_field(db_field, request, **kwargs)
+    1.  ModelAdmin.get_changelist(request, **kwargs)
+    1.  ModelAdmin.get_changelist_form(request, **kwargs)
+    1.  ModelAdmin.get_changelist_formset(request, **kwargs)
+    1.  ModelAdmin.lookup_allowed(lookup, value)
+    1.  ModelAdmin.has_view_permission(request, obj=None)
+    1.  ModelAdmin.has_add_permission(request)
+    1.  ModelAdmin.has_change_permission(request, obj=None)
+    1.  ModelAdmin.has_delete_permission(request, obj=None)
+    1.  ModelAdmin.has_module_permission(request)
+    1.  ModelAdmin.get_queryset(request)
+    1.  ModelAdmin.message_user(request, message, level=messages.INFO, extra_tags='', fail_silently=False)
+    1.  ModelAdmin.get_paginator(request, queryset, per_page, orphans=0, allow_empty_first_page=True)
+    1.  ModelAdmin.response_add(request, obj, post_url_continue=None)
+    1.  ModelAdmin.response_change(request, obj)
+    1.  ModelAdmin.response_delete(request, obj_display, obj_id)
+    1.  ModelAdmin.get_changeform_initial_data(request)
+    1.  ModelAdmin.get_deleted_objects(objs, request)
+
+1. Other methods
+
+    1. ModelAdmin.add_view(request, form_url='', extra_context=None)
+    1. ModelAdmin.change_view(request, object_id, form_url='', extra_context=None)
+    1. ModelAdmin.changelist_view(request, extra_context=None)
+    1. ModelAdmin.delete_view(request, object_id, extra_context=None)
+    1. ModelAdmin.history_view(request, object_id, extra_context=None)
+
+1. ModelAdmin asset definitions
+    1. class Media 
+    1. django.jQuery
+
+1. Adding custom validation to the admin
+    1. using django model form
+
+1. InlineModelAdmin objects
+
+    1. InlineModelAdmin options
+    1. Working with a model with two or more foreign keys to the same parent model
+    1. Working with many-to-many models
+    1. Working with many-to-many intermediary models
+    1. Using generic relations as an inline
+
+1. Overriding admin templates
+
+    1. Set up your projects admin template directories
+    1. Overriding vs. replacing an admin template
+    1. Templates which may be overridden per app or model
+    1. Root and login templates
+
+1. AdminSite objects
+
+    1. AdminSite attributes
+    1. AdminSite methods
+    1. Hooking AdminSite instances into your URLconf
+    1. Customizing the AdminSite class
+    1. Overriding the default admin site
+    1. Multiple admin sites in the same URLconf
+    1. Adding views to admin sites
+    1. Adding a password reset feature
+
+1. LogEntry objects
+
+    1. LogEntry attributes
+    1. LogEntry methods
+
+1. Reversing admin URLs
+1. The staff_member_required decorator
 
 ### Working with forms
 
