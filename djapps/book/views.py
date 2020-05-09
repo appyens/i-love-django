@@ -1,5 +1,4 @@
-from django.shortcuts import render, redirect, reverse
-from django.utils.text import slugify
+from django.shortcuts import render, redirect
 from common.utils import slug_generator
 from .models import Author, Book, Language, Genre, Publisher
 
@@ -7,8 +6,8 @@ from .models import Author, Book, Language, Genre, Publisher
 
 
 def book_home(request):
-    books = Book.objects.filter(is_active=True).count()
-    return render(request, 'book/home.html', {'books': books})
+    recent = Book.objects.filter(is_active=True).order_by('-created_on')[:3]
+    return render(request, 'book/home.html', {'recent': recent, 'total': Book.total_books()})
 
 
 def add_author(request):
@@ -35,7 +34,6 @@ def add_genre(request):
         data = request.POST
         genre = data['genre']
         Genre.objects.create(genre=genre)
-        messages.success(request, "Genre added successfully")
         return render(request, 'book/add_genre.html', {})
     return render(request, 'book/add_genre.html')
 
@@ -137,8 +135,7 @@ def edit_book(request, book_id=None):
         book.genre = genre
         book.author = author
         book.save()
-        url = reverse('book_detail', args=[book.id])
-        return redirect(url)
+        return redirect(book.get_absolute_url())
     return render(request, 'book/edit.html', {'book': book, 'authors': all_authors,
                                                    'languages': all_langs, 'genres': all_genre})
 

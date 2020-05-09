@@ -5,7 +5,7 @@ from .models import Author, Genre, Language, Publisher, Book
 
 class BookModelAdmin(admin.ModelAdmin):
     list_display = ('title', 'year', 'language', 'genre')
-    prepopulated_fields = {"slug": ("title",)}
+    # prepopulated_fields = {"slug": ("title",)}
 
 
 admin.site.register(Author)
