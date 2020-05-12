@@ -21,6 +21,7 @@ from django.conf.urls.static import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('book/', include('book.urls', namespace='book')),
+    path('task_one/', include('task_one.urls', namespace='task_one')),
 ]
 #
 if settings.DEBUG:

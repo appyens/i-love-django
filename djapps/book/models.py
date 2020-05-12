@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from django.shortcuts import reverse
-
+from common.validators import first_name_validator
 
 class Genre(models.Model):
     """
@@ -108,6 +108,9 @@ class Book(models.Model):
     is_active = models.BooleanField(default=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        get_latest_by = 'created_on'
 
     def __str__(self):
         """

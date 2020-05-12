@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from common.utils import slug_generator
 from .models import Author, Book, Language, Genre, Publisher
+from .forms import AddAuthorForm, AddBookForm
 
 # Create your views here.
 
@@ -10,14 +11,31 @@ def book_home(request):
     return render(request, 'book/home.html', {'recent': recent, 'total': Book.total_books()})
 
 
+# def add_author(request):
+#     if request.method == 'POST':
+#         data = request.POST
+#         first_name = data['first_name']
+#         last_name = data['last_name']
+#         Author.objects.create(first_name=first_name, last_name=last_name)
+#         return render(request, 'book/add_author.html', {})
+#     return render(request, 'book/add_author.html')
+
 def add_author(request):
     if request.method == 'POST':
-        data = request.POST
-        first_name = data['first_name']
-        last_name = data['last_name']
-        Author.objects.create(first_name=first_name, last_name=last_name)
-        return render(request, 'book/add_author.html', {})
-    return render(request, 'book/add_author.html')
+        form = AddAuthorForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            first_name = cd['first_name']
+            last_name = cd['last_name']
+            email = cd['email']
+            dob = cd['dob']
+            death = cd['death']
+            Author.objects.create(first_name=first_name, last_name=last_name, dob=dob, death=death)
+            form = AddAuthorForm()
+            return render(request, 'book/add_author.html', {'form': form})
+    else:
+        form = AddAuthorForm()
+        return render(request, 'book/add_author.html', {'form': form})
 
 
 def add_language(request):
