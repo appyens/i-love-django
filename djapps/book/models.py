@@ -3,6 +3,7 @@ from django.utils.text import slugify
 from django.shortcuts import reverse
 from common.validators import first_name_validator
 
+
 class Genre(models.Model):
     """
     Genre mapping for book model

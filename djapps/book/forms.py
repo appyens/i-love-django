@@ -1,8 +1,9 @@
 from django import forms
 from django.core.validators import EmailValidator
-from .models import Book
+from .models import Book, Author, Genre, Language
 
 
+# sample only
 class AddAuthorForm(forms.Form):
     first_name = forms.CharField(
         max_length=256,
@@ -34,7 +35,30 @@ class AddAuthorForm(forms.Form):
     )
 
 
-class AddBookForm(forms.ModelForm):
+class AuthorForm(forms.ModelForm):
+
+    class Meta:
+        model = Author
+        fields = ('first_name', 'middle_name', 'last_name', 'dob', 'death')
+
+
+class BookForm(forms.ModelForm):
+
     class Meta:
         model = Book
-        fields = '__all__'
+        fields = (
+            'title',
+            'authors',
+            'edition',
+            'pages',
+            'year',
+            'language',
+            'genre',
+            'publisher',
+            'description',
+            'front_cover',
+        )
+        widgets = {
+            'title': forms.TextInput,
+            'authors': forms.SelectMultiple,
+        }

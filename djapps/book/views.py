@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from common.utils import slug_generator
+from django.core.exceptions import ObjectDoesNotExist
 from .models import Author, Book, Language, Genre, Publisher
-from .forms import AddAuthorForm, AddBookForm
+from .forms import AuthorForm, BookForm
+
 
 # Create your views here.
 
@@ -10,6 +12,8 @@ def book_home(request):
     recent = Book.objects.filter(is_active=True).order_by('-created_on')[:3]
     return render(request, 'book/home.html', {'recent': recent, 'total': Book.total_books()})
 
+
+# no form
 
 # def add_author(request):
 #     if request.method == 'POST':
@@ -20,21 +24,34 @@ def book_home(request):
 #         return render(request, 'book/add_author.html', {})
 #     return render(request, 'book/add_author.html')
 
+# using form
+# def add_author(request):
+#     if request.method == 'POST':
+#         form = AddAuthorForm(request.POST)
+#         if form.is_valid():
+#             cd = form.cleaned_data
+#             first_name = cd['first_name']
+#             last_name = cd['last_name']
+#             email = cd['email']
+#             dob = cd['dob']
+#             death = cd['death']
+#             Author.objects.create(first_name=first_name, last_name=last_name, dob=dob, death=death)
+#             form = AddAuthorForm()
+#             return render(request, 'book/add_author.html', {'form': form})
+#     else:
+#         form = AddAuthorForm()
+#         return render(request, 'book/add_author.html', {'form': form})
+
+# using model form
 def add_author(request):
     if request.method == 'POST':
-        form = AddAuthorForm(request.POST)
+        form = AuthorForm(request.POST)
         if form.is_valid():
-            cd = form.cleaned_data
-            first_name = cd['first_name']
-            last_name = cd['last_name']
-            email = cd['email']
-            dob = cd['dob']
-            death = cd['death']
-            Author.objects.create(first_name=first_name, last_name=last_name, dob=dob, death=death)
-            form = AddAuthorForm()
+            form.save()
+            form = AuthorForm()
             return render(request, 'book/add_author.html', {'form': form})
     else:
-        form = AddAuthorForm()
+        form = AuthorForm()
         return render(request, 'book/add_author.html', {'form': form})
 
 
@@ -55,53 +72,67 @@ def add_genre(request):
         return render(request, 'book/add_genre.html', {})
     return render(request, 'book/add_genre.html')
 
+# using no form
 
+# def add_book(request):
+#     all_authors = Author.objects.all()
+#     all_langs = Language.objects.all()
+#     all_genre = Genre.objects.all()
+#
+#     # taking from user
+#     if request.method == 'POST':
+#         data = request.POST
+#         title = data['title']
+#         pages = data['pages']
+#         language_id = data['lang']
+#         desc = data['desc']
+#         genre_id = data['genre']
+#         author_id = data['author']
+#         year = data['year']
+#         pub = data['pub']
+#
+#         # getting object from db
+#         author = Author.objects.get(id=author_id)
+#         language = Language.objects.get(id=language_id)
+#         genre = Genre.objects.get(id=genre_id)
+#
+#         # getting files
+#         front_cover = request.FILES.get('f_cover', None)
+#         back_cover = request.FILES.get('b_cover', None)
+#
+#         # assigning to the model
+#         book = Book.objects.create(
+#             title=title,
+#             slug=slug_generator(title),
+#             pages=pages,
+#             language=language,
+#             description=desc,
+#             genre=genre,
+#             year=year,
+#             publication=pub,
+#             front_cover=front_cover,
+#             back_cover=back_cover
+#         )
+#         book.authors.add(author)
+#         book.save()
+#         return render(request, 'book/add.html', )
+#
+#     context = {'authors': all_authors,
+#                'languages': all_langs, 'genres': all_genre}
+#     return render(request, 'book/add.html', context)
+
+
+# using model form
 def add_book(request):
-    all_authors = Author.objects.all()
-    all_langs = Language.objects.all()
-    all_genre = Genre.objects.all()
-
-    # taking from user
     if request.method == 'POST':
-        data = request.POST
-        title = data['title']
-        pages = data['pages']
-        language_id = data['lang']
-        desc = data['desc']
-        genre_id = data['genre']
-        author_id = data['author']
-        year = data['year']
-        pub = data['pub']
-
-        # getting object from db
-        author = Author.objects.get(id=author_id)
-        language = Language.objects.get(id=language_id)
-        genre = Genre.objects.get(id=genre_id)
-
-        # getting files
-        front_cover = request.FILES.get('f_cover', None)
-        back_cover = request.FILES.get('b_cover', None)
-
-        # assigning to the model
-        book = Book.objects.create(
-            title=title,
-            slug=slug_generator(title),
-            pages=pages,
-            language=language,
-            description=desc,
-            genre=genre,
-            year=year,
-            publication=pub,
-            front_cover=front_cover,
-            back_cover=back_cover
-        )
-        book.authors.add(author)
-        book.save()
-        return render(request, 'book/add.html',)
-
-    context = {'authors': all_authors,
-               'languages': all_langs, 'genres': all_genre}
-    return render(request, 'book/add.html', context)
+        form = BookForm(request.POST)
+        if form.is_valid():
+            form.save()
+            form = BookForm()
+        return render(request, 'book/add.html', {'form': form})
+    else:
+        form = BookForm()
+        return render(request, 'book/add.html', {'form': form})
 
 
 def author_list(request):
@@ -115,9 +146,7 @@ def author_list(request):
 def book_list(request):
     if request.method == 'GET':
         books = Book.objects.filter(is_active=True)
-        context = {'books': books}
-        return render(request, 'book/list.html', context)
-    return render(request, 'book/list.html', context)
+        return render(request, 'book/list.html', {'books': books})
 
 
 def book_detail(request, slug_field):
@@ -155,11 +184,10 @@ def edit_book(request, book_id=None):
         book.save()
         return redirect(book.get_absolute_url())
     return render(request, 'book/edit.html', {'book': book, 'authors': all_authors,
-                                                   'languages': all_langs, 'genres': all_genre})
+                                              'languages': all_langs, 'genres': all_genre})
 
 
 def delete_book(request, book_id):
-
     book = Book.objects.get(id=book_id)
     book.is_active = False
     book.save()
