@@ -135,3 +135,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DATABASE_ROUTERS = ['db_routers.BookRouter']
 
 AUTH_USER_MODEL = 'task_one.User'
+LOGIN_REDIRECT_URL = 'task_one:dashboard'

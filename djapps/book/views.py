@@ -1,12 +1,9 @@
 from django.shortcuts import render, redirect
-from common.utils import slug_generator
-from django.core.exceptions import ObjectDoesNotExist
-from .models import Author, Book, Language, Genre, Publisher
-from .forms import AuthorForm, BookForm
 from django.db.models import Q
 
-
-# Create your views here.
+from common.utils import slug_generator
+from .models import Author, Book, Language, Genre, Publisher
+from .forms import AuthorForm, BookForm
 
 
 def book_home(request):
@@ -191,6 +188,7 @@ def edit_book(request, book_id=None):
 
 def delete_book(request, book_id):
     book = Book.objects.get(id=book_id)
+    # soft delete
     book.is_active = False
     book.save()
     # hard delete
@@ -198,14 +196,15 @@ def delete_book(request, book_id):
     return redirect('book_list')
 
 
+# join views
 def search_book(request):
     if request.method == "GET":
         query = request.GET.get('query', None)
+        # simple search with title only
         books = Book.objects.filter(title__icontains=query)
+        # advanced lookup with Q
         books = Book.objects.filter(
-            Q(title__icontains=query) |
-            Q(description__icontains=query) |
-            Q(authors__last_name=query)
-        )
+            Q(title__icontains=query) | Q(description__icontains=query) |
+            Q(authors__fullname__icontains=query) | Q(authors__last_name__icontains=query)
+        ).distinct()
         return render(request, 'book/list.html', {'books': books})
-    # return render(request, 'book/list.html', {})
