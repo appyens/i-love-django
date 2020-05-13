@@ -3,6 +3,7 @@ from common.utils import slug_generator
 from django.core.exceptions import ObjectDoesNotExist
 from .models import Author, Book, Language, Genre, Publisher
 from .forms import AuthorForm, BookForm
+from django.db.models import Q
 
 
 # Create your views here.
@@ -152,7 +153,8 @@ def book_list(request):
 def book_detail(request, slug_field):
     if request.method == 'GET':
         book = Book.objects.get(slug=slug_field)
-        return render(request, 'book/detail.html', {'book': book})
+        related_books = Book.objects.filter(genre=book.genre).exclude(title=book.title)
+        return render(request, 'book/detail.html', {'book': book, 'related': related_books})
 
 
 def edit_book(request, book_id=None):
@@ -194,3 +196,16 @@ def delete_book(request, book_id):
     # hard delete
     # book.delete()
     return redirect('book_list')
+
+
+def search_book(request):
+    if request.method == "GET":
+        query = request.GET.get('query', None)
+        books = Book.objects.filter(title__icontains=query)
+        books = Book.objects.filter(
+            Q(title__icontains=query) |
+            Q(description__icontains=query) |
+            Q(authors__last_name=query)
+        )
+        return render(request, 'book/list.html', {'books': books})
+    # return render(request, 'book/list.html', {})
