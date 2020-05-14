@@ -1,10 +1,10 @@
 
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from .manager import UserManager
 
 
-class User(AbstractBaseUser):
+class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,
@@ -13,7 +13,7 @@ class User(AbstractBaseUser):
     active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False) # a admin user; non super-user
     admin = models.BooleanField(default=False) # a superuser
-    mobile_number = models.IntegerField(blank=True, unique=True)
+    mobile_number = models.CharField(max_length=10, blank=True, unique=True)
     user_ip = models.GenericIPAddressField(blank=True, null=True)
     browser = models.CharField(max_length=1000, blank=True)
     user_mac = models.CharField(max_length=100, blank=True)

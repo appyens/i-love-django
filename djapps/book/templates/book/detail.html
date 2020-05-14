@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'book/base.html' %}
 
 {% block title %}{{ book.title }} {% endblock %}
 
@@ -33,6 +33,9 @@
                 <li>ISBN 13: {{ book.isbn_13 }}</li>
                 {% endif %}
             </ul>
+            <a href="{% url 'book:edit_book' pk=book.id %}">
+                <button class="btn btn-primary">Edit</button>
+            </a>
         </div>
 
     </div>

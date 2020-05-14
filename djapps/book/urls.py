@@ -10,11 +10,7 @@ urlpatterns = [
     path('add/', views.add_book, name='add_book'),
     path('search_book/', views.search_book, name='search_book'),
     path('<slug:slug_field>/', views.book_detail, name='book_detail'),
-
     # for vilas
-    path('add/author/', views.add_author, name='add_author'),
-    path('add/genre/', views.add_genre, name='add_genre'),
-    path('add/language/', views.add_language, name='add_language'),
-    path('edit/<int:book_id>/', views.edit_book, name='book_edit'),
+    path('edit/<int:pk>/', views.edit_book, name='edit_book'),
     path('delete/<int:book_id>/', views.delete_book, name='delete_book'),
 ]

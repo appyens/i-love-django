@@ -1,52 +1,12 @@
-{% extends 'base.html' %}
+{% extends 'book/base.html' %}
 
 {% block title %}Edit Book {% endblock %}
 
 {% block content %}
 <div>
-    <form action="{% url 'book_edit' book.id %}" method="post">
+    <form action="{% url 'book:edit_book' book.id %}" method="post">
         {% csrf_token %}
-        <label for="author">Title:</label>
-        <p><input type="text" name=title value="{{ book.title }}"></p>
-
-        <label for="author">Pages:</label>
-        <p><input type="text" name=pages value="{{ book.pages }}"></p>
-
-        <label for="author">Publication:</label>
-        <p><input type="text" name="pub" value="{{ book.publication }}"></p>
-
-        <label for="author">Year:</label>
-        <p><input type="text" name="year" value="{{ book.year }}"></p>
-
-        <label for="author">Description:</label>
-        <p><textarea name="desc">{{ book.description }}</textarea></p>
-        <p>
-            <label for="author">Choose author:</label>
-            <select id="author" name="author">
-                {% for auth in authors %}
-                <option value="{{ auth.id }}">{{ auth }}</option>
-                {% endfor %}
-            </select>
-        </p>
-
-
-        <p>
-            <label for="language">Choose Language:</label>
-            <select id="language" name="lang">
-                {% for lang in languages %}
-                <option value="{{ lang.id }}">{{ lang }}</option>
-                {% endfor %}
-            </select>
-        </p>
-
-        <p>
-            <label for="genre">Choose Genre:</label>
-            <select id="genre" name="genre">
-                {% for gen in genres %}
-                <option value="{{ gen.id }}">{{ gen }}</option>
-                {% endfor %}
-            </select>
-        </p>
+        {{ form.as_p }}
         <input class="btn btn-success" type="submit" value="Save">
     </form>
 
