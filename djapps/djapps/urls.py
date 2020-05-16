@@ -17,11 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf.urls.static import settings
+from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.Index.as_view(), name='index'),
     path('book/', include('book.urls', namespace='book')),
-    path('task_one/', include('task_one.urls', namespace='task_one')),
 ]
 #
 if settings.DEBUG:

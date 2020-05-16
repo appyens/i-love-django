@@ -1,13 +1,29 @@
+# _*_ encoding utf-8 _*_
+
+""" views for book app """
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
-from .models import Author, Book, Language, Genre, Publisher
-from .forms import AuthorForm, BookForm
 from django.views.decorators.http import require_GET, require_POST, require_http_methods
+from django.views.generic import ListView, DetailView, TemplateView
+
+from .models import Author, Book
+from .forms import BookForm
 
 
 def book_home(request):
     recent = Book.objects.filter(is_active=True).order_by('-created_on')[:3]
     return render(request, 'book/home.html', {'recent': recent, 'total': Book.total_books()})
+
+
+class BookHome(TemplateView):
+    template_name = 'book/home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(BookHome, self).get_context_data(**kwargs)
+        context['recent'] = Book.objects.filter(is_active=True).order_by('-created_on')[:3]
+        context['total'] = Book.total_books()
+        return context
 
 
 # using model form
@@ -36,8 +52,14 @@ def author_list(request):
 @require_http_methods(['GET', 'POST'])
 def book_list(request):
     if request.method == 'GET':
-        books = Book.objects.filter(is_active=True)
+        # getting book objects
+        books = Book.objects.filter(is_active=True).order_by('title')
         return render(request, 'book/list.html', {'books': books})
+
+
+class BookListView(ListView):
+    model = Book
+    context_object_name = 'books'
 
 
 def book_detail(request, slug_field):
@@ -45,6 +67,17 @@ def book_detail(request, slug_field):
         book = Book.objects.get(slug=slug_field)
         related_books = Book.objects.filter(genre=book.genre).exclude(title=book.title)
         return render(request, 'book/detail.html', {'book': book, 'related': related_books})
+
+
+class BookDetailView(DetailView):
+    model = Book
+    context_object_name = 'book'
+
+    def get_context_data(self, **kwargs):
+        context = super(BookDetailView, self).get_context_data(**kwargs)
+        book = self.object
+        context['related'] = Book.objects.filter(genre=book.genre).exclude(title=book.title)
+        return context
 
 
 @require_http_methods(['GET', 'POST'])
@@ -81,3 +114,9 @@ def search_book(request):
             Q(authors__first_name__icontains=query) | Q(authors__last_name__icontains=query)
         ).distinct()
         return render(request, 'book/list.html', {'books': books, 'query': query})
+
+
+def book_by_author(request, author_id=None):
+    author = Author.objects.get(pk=author_id)
+    books = Book.objects.filter(authors__id=author_id)
+    return render(request, 'book/book_list.html', {'books': books, 'author': author})

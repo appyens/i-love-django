@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'book.apps.BookConfig',
-    'task_one.apps.TaskOneConfig',
 ]
 
 MIDDLEWARE = [
@@ -77,17 +76,9 @@ WSGI_APPLICATION = 'djapps.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'Gpa$$i0n',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    },
-    'book_db': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'books.sqlite3'),
-    }
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    },
 }
 
 
@@ -135,8 +126,3 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-DATABASE_ROUTERS = ['db_routers.BookRouter']
-
-AUTH_USER_MODEL = 'task_one.User'
-LOGIN_REDIRECT_URL = 'task_one:dashboard'
