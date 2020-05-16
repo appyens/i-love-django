@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
 from django.views.decorators.http import require_GET, require_POST, require_http_methods
 from django.views.generic import ListView, DetailView, TemplateView
+from django.contrib import messages
 
 from .models import Author, Book
 from .forms import BookForm
@@ -28,13 +29,17 @@ class BookHome(TemplateView):
 
 # using model form
 @require_http_methods(['GET', 'POST'])
-def add_book(request):
+def add_book(request, ):
     if request.method == 'POST':
         form = BookForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            form = BookForm()
-        return render(request, 'book/add.html', {'form': form})
+            book = form.save()
+
+            # no need in redirects
+            # form = BookForm()
+            # return render(request, 'book/add.html', {'form': form})
+            request.session.get('success', "Book has been saved successfully")
+            return redirect('book:book_detail', slug=book.slug)
     else:
         form = BookForm()
         return render(request, 'book/add.html', {'form': form})
@@ -54,7 +59,7 @@ def book_list(request):
     if request.method == 'GET':
         # getting book objects
         books = Book.objects.filter(is_active=True).order_by('title')
-        return render(request, 'book/list.html', {'books': books})
+        return render(request, 'book/book_list.html', {'books': books})
 
 
 class BookListView(ListView):
@@ -65,6 +70,9 @@ class BookListView(ListView):
 def book_detail(request, slug_field):
     if request.method == 'GET':
         book = Book.objects.get(slug=slug_field)
+        msg = request.session.get('msg', None)
+        if msg:
+            messages.success(request, msg)
         related_books = Book.objects.filter(genre=book.genre).exclude(title=book.title)
         return render(request, 'book/detail.html', {'book': book, 'related': related_books})
 
@@ -77,6 +85,8 @@ class BookDetailView(DetailView):
         context = super(BookDetailView, self).get_context_data(**kwargs)
         book = self.object
         context['related'] = Book.objects.filter(genre=book.genre).exclude(title=book.title)
+        context['success'] = self.request.session.get('success', None)
+        print(context)
         return context
 
 

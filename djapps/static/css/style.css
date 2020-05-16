@@ -19,3 +19,8 @@ td, th {
   text-align: left;
   padding: 8px;
 }
+
+.success {
+   color: green;
+   text-align: center;
+}
