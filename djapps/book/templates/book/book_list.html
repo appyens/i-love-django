@@ -19,8 +19,8 @@
     {% for book in books %}
     <div class="col-4">
         <div class="card" style="width:300px">
-            <a href="{{ book.get_absolute_url }}">
-                <img class="" src="{{ book.front_cover.url }}" alt="Card image" height="auto" width="300">
+            <a id="book_url" href="{{ book.get_absolute_url }}">
+                <img id="cover" class="" src="{{ book.front_cover.url }}" alt="Card image" height="auto" width="300">
             </a>
             <div class="card-body">
                 <h4 class="card-title">{{ book.title }}</h4>
@@ -31,5 +31,9 @@
     {% endfor %}
 
 </div>
+
+<script>
+
+</script>
 
 {% endblock %}

@@ -7,9 +7,11 @@ from django.db.models import Q
 from django.views.decorators.http import require_GET, require_POST, require_http_methods
 from django.views.generic import ListView, DetailView, TemplateView
 from django.contrib import messages
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 from .models import Author, Book
-from .forms import BookForm
+from .forms import BookForm, AddLanguageForm
 
 
 def book_home(request):
@@ -34,7 +36,6 @@ def add_book(request, ):
         form = BookForm(request.POST, request.FILES)
         if form.is_valid():
             book = form.save()
-
             # no need in redirects
             # form = BookForm()
             # return render(request, 'book/add.html', {'form': form})
@@ -74,7 +75,7 @@ def book_detail(request, slug_field):
         if msg:
             messages.success(request, msg)
         related_books = Book.objects.filter(genre=book.genre).exclude(title=book.title)
-        return render(request, 'book/detail.html', {'book': book, 'related': related_books})
+        return render(request, 'book/book_detail.html', {'book': book, 'related': related_books})
 
 
 class BookDetailView(DetailView):
@@ -123,10 +124,35 @@ def search_book(request):
             Q(title__icontains=query) | Q(description__icontains=query) |
             Q(authors__first_name__icontains=query) | Q(authors__last_name__icontains=query)
         ).distinct()
-        return render(request, 'book/list.html', {'books': books, 'query': query})
+        return render(request, 'book/book_list.html', {'books': books, 'query': query})
 
 
 def book_by_author(request, author_id=None):
     author = Author.objects.get(pk=author_id)
     books = Book.objects.filter(authors__id=author_id)
     return render(request, 'book/book_list.html', {'books': books, 'author': author})
+
+
+def like_book(request):
+    if request.method == 'GET':
+        status = request.GET.get("status")
+        if status == "Like":
+            return JsonResponse({"status": "Unlike"})
+        return JsonResponse({"status": "Like"})
+
+
+def add_language(request):
+    if request.method == "GET":
+        form = AddLanguageForm()
+        return render(request, 'book/add_language.html', {"form": form})
+
+
+@csrf_exempt
+def post_language(request):
+    if request.method == "POST":
+        data = request.POST
+        form = AddLanguageForm()
+        language = form.save(commit=False)
+        language.language = data['data']
+        language.save()
+        return JsonResponse({"status": "Language added successfully"})

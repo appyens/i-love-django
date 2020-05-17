@@ -62,3 +62,10 @@ class BookForm(forms.ModelForm):
             'title': forms.TextInput,
             'authors': forms.SelectMultiple,
         }
+
+
+class AddLanguageForm(forms.ModelForm):
+
+    class Meta:
+        model = Language
+        fields = ('language',)

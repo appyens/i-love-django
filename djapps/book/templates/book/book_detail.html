@@ -48,6 +48,8 @@
             <a href="{% url 'book:edit_book' pk=book.id %}">
                 <button class="btn btn-primary">Edit</button>
             </a>
+
+                <input type="submit" class="btn btn-danger" id="like" value="Like">
         </div>
 
     </div>
@@ -72,4 +74,38 @@
 <!-- /.container -->
 
 
-{% endblock %}
+{% endblock content %}
+
+{% block javascript %}
+<script>
+$("#like").click(function (event){
+    event.preventDefault();
+    console.log(event);
+    var value = $(this).attr("value");
+    console.log(value)
+    $.ajax({
+        type: "GET",
+        url: "/book/like/",
+        data: {
+            "status": value,
+            "book_id": {{ book.id }}
+        },
+        success: function( response )
+        {
+            var newStatus = response.status
+            $("#like").attr("value", newStatus);
+
+            if (newStatus == "Like"){
+                $("#like").attr("class", 'btn btn-success');
+            }else{
+                $("#like").attr("class", 'btn btn-danger');
+            }
+
+        }
+
+    });
+
+});
+</script>
+
+{% endblock javascript %}
