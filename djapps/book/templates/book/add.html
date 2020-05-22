@@ -2,9 +2,11 @@
 
 {% block title %}Add Book {% endblock %}
 
+{% block style %}
+<link rel="stylesheet" href="{% url 'book/static/css/book_style.css' %}">
+{% endblock style %}
+
 {% block content %}
-
-
 <!-- for django message-->
 {% if messages %}
 <ul class="messages">
@@ -23,3 +25,9 @@
     </form>
 </div>
 {% endblock %}
+
+{% block javascript %}
+<script>
+
+</script>
+{% endblock javascript %}

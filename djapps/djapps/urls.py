@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.Index.as_view(), name='index'),
     path('book/', include('book.urls', namespace='book')),
+    path('book-cbv/', include('book_cbv.urls', namespace='book_cbv')),
     path('ajax_app/', include('ajax_app.urls', namespace='ajax_app')),
 ]
 #
