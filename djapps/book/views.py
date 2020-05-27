@@ -48,7 +48,7 @@ def book_detail(request, slug_field):
         if msg:
             messages.success(request, msg)
         related_books = Book.objects.filter(genre=book.genre).exclude(title=book.title)
-        return render(request, 'book/book_detail.html', {'book': book, 'related': related_books})
+        return render(request, 'book/book_detail.html', {'book': book, 'related': related_books}, status=200)
 
 
 def search_book(request):
@@ -61,7 +61,7 @@ def search_book(request):
             Q(title__icontains=query) | Q(description__icontains=query) |
             Q(authors__first_name__icontains=query) | Q(authors__last_name__icontains=query)
         ).distinct()
-        return render(request, 'book/book_list.html', {'books': books, 'query': query})
+        return render(request, 'book/book_list.html', {'books': books, 'query': query}, status=200)
 
 
 def add_author(request):
@@ -83,6 +83,8 @@ def add_publisher(request):
 # using model form
 @require_http_methods(['GET', 'POST'])
 def add_book(request, ):
+    template = 'book/add.html'
+    context = {}
     if request.method == 'POST':
         form = BookForm(request.POST, request.FILES)
         if form.is_valid():
@@ -94,7 +96,7 @@ def add_book(request, ):
             return redirect('book:book_detail', slug=book.slug)
     else:
         form = BookForm()
-        return render(request, 'book/add.html', {'form': form})
+        return render(request, template_name=template, context=context, content_type='text/html', status=200)
 
 
 @require_http_methods(['GET', 'POST'])

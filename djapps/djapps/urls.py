@@ -26,6 +26,7 @@ urlpatterns = [
     path('book/', include('book.urls', namespace='book')),
     path('book-cbv/', include('book_cbv.urls', namespace='book_cbv')),
     path('ajax_app/', include('ajax_app.urls', namespace='ajax_app')),
+    path('post/', include('post.urls', namespace='post')),
 ]
 #
 if settings.DEBUG:
