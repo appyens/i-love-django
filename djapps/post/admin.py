@@ -4,5 +4,9 @@ from .models import Post, Comment
 # Register your models here.
 
 
-admin.site.register(Post)
+class PostModelAdmin(admin.ModelAdmin):
+    list_display = ('title', 'status', 'publish')
+
+
+admin.site.register(Post, PostModelAdmin)
 admin.site.register(Comment)

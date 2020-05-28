@@ -1,10 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block title %}My blog{% endblock title %}
+
+{% block style %}
+{% endblock style %}
+
+{% block content %}
+<h1>Welcome to my blog</h1>
+<div>
+    {% for post in posts %}
+        <h2>{{ post.title }}</h2>
+            <p>by {{ post.author }} published on {{ post.publish }}</p>
+            {% if post.image %}
+            <img src="{% url 'post.image.url' %}" alt="">
+            {% endif %}
+        <p>{{ post.body }}</p>
+    {% endfor %}
+</div>
+{% endblock content %}
+
+{% block javascript %}
+{% endblock javascript %}
