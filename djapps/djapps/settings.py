@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'book.apps.BookConfig',
     'book_cbv.apps.BookCbvConfig',
-    'ajax_app.apps.AjaxAppConfig',
     'post.apps.PostConfig',
 
 ]

@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Anurag's Books collection {% endblock %}
+
+    {% block style %}
+    <link rel="stylesheet" href="{% static 'css/book.css' %}">
+    {% endblock style %}
 
 {% block content %}
 <h1>Welcome to Anurag's book library <small>Total books {{ total }}</small></h1>

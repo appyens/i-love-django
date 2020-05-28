@@ -1,6 +1,6 @@
 <div class="col-3" style="background-color: cyan">
     <h4>Popular posts</h4>
     {% for post in posts %}
-    <p>{{ post.title|truncatechars:17 }}</p>
+    <p>{{ post.title|truncatechars:30 }}</p>
     {% endfor %}
 </div>
