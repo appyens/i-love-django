@@ -142,3 +142,5 @@ class Book(models.Model):
         :return:
         """
         return cls.objects.count()
+
+

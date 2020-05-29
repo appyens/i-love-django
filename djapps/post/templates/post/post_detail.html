@@ -6,16 +6,26 @@
 {% endblock style %}
 
 {% block content %}
-<h1>Welcome to my blog</h1>
 <div>
-    {% for post in posts %}
-        <h2>{{ post.title }}</h2>
-            <p>by {{ post.author }} published on {{ post.publish }}</p>
-            {% if post.image %}
-            <img src="{% url 'post.image.url' %}" alt="">
-            {% endif %}
-        <p>{{ post.body }}</p>
+    <h2>{{ post.title }}</h2>
+    <p>by {{ post.author }} published on {{ post.publish }} | {{ comments.count }} comments | {{ post.views }} views</p>
+    <img src="{{ post.image.url }}" alt="">
+    <p>{{ post.body }}</p>
+    <hr>
+    <div>
+        <form action="" method="POST">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <button class="btn btn-primary">Post</button>
+        </form>
+    </div>
+    <h4>Comments</h4>
+    {% for c in comments %}
+    <p>{{ c.body }}</p>
+    <p>commented by <b>{{ c.name }}</b></p>
+    <br>
     {% endfor %}
+
 </div>
 {% endblock content %}
 

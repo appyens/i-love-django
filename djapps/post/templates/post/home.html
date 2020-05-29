@@ -13,10 +13,15 @@
     <div class="col-9">
         {% for post in posts %}
         <h4>{{ post.title }}</h4>
-        <p>{{ post.body|truncatechars:200 }} <span><a href="">read more</a></span></p>
+        <p>{{ post.body|truncatechars:200 }} <span><a href="{{ post.get_absolute_url }}">read more</a></span></p>
         {% endfor %}
     </div>
-    {% include 'post/snippets/sidebar.html' %}
+    <div class="col-3" style="background-color: cyan">
+    <h4>Popular posts</h4>
+    {% for post in posts %}
+    <p>{{ post.title|truncatechars:30 }}</p>
+    {% endfor %}
+</div>
 </div>
 
 {% endblock content %}
