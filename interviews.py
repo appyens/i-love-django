@@ -10,7 +10,7 @@
 9. What is middleware
 10. How to write a middleware
 11. Manager in django
-12. optimize django queries
+12. How to optimize django queries with example
 13. raw sql queries on model
 14. third party tool integrations - Redis, RabbitMQ, ElasticSearch, Celary.
 15. How to put custom validation on Form and Model Fields.
@@ -21,9 +21,9 @@
 20. Authentication backend
 21. reverse query for releated model
 22. what is related_name arg.
-23. Django admin
-24. What is signals
-25. How to make djagno filled with user data
+23. What is django admin
+24. What is django signals
+25. How to make djagno forms prefilled with user data
 26. What django version you used
 27. Difference between djagno version
 28. What is formsets
@@ -32,6 +32,6 @@
 31. How will you write POST API
 32. Django session
 33. Django Cookie
-34. Web dev tools
-35. Queryset customization
+34. What are datatypes that django models provides
+
 """
